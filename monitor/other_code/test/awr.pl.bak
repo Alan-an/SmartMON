@@ -1,0 +1,119 @@
+#!/bin/perl
+
+$filename=@ARGV[0];
+
+if ( ! -e "$filename" || ! open (FILE, "$filename") ) {
+  # If can't open the awr report file, then output the error message, and exit
+  die ("Can't open file $filename, or file doesn't exist.");
+  exit;
+}
+
+$mode='';
+
+while ($line = <FILE> ){
+
+# 1. For the "Load Profile" part.
+  $mode='Load Profile' if ($line=~/^\s?Load Profile\s+Per Second\s+Per Transaction\s+Per Exec\s+Per Call\s+/);
+  $mode='Instance Efficiency' if ($line=~/^\s?Instance Efficiency Percentages \(Target 100%\)/);
+  $mode='Shared Pool Statistics' if ($line=~/^\s?Shared Pool Statistics\s+Begin\s+End/);
+  $mode='Top 5 Timed Foreground Events' if ($line=~/^\s?Top 5 Timed Foreground Events/);
+  $mode='Host CPU' if ($line=~/^\s?Host CPU \(/);
+  $mode='Instance CPU' if ($line=~/^\s?Instance CPU$/);
+  $mode='Memory Statistics' if ($line=~/^\s?Memory Statistics$/);
+  $mode='Time Model Statistics' if ($line=~/^\s?Time Model Statistics\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='Operating System Statistics' if ($line=~/^\s?Operating System Statistics\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='Operating System Statistics - Detail' if ($line=~/^\s?Operating System Statistics - Detail\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='Foreground Wait Class' if ($line=~/^\s?Foreground Wait Class\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='Foreground Wait Events' if ($line=~/^\s?Foreground Wait Events\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='Background Wait Events' if ($line=~/^\s?Background Wait Events\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='Wait Event Histogram' if ($line=~/^\s?Wait Event Histogram\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='Wait Event Histogram Detail' if ($line=~/^\s?Wait Event Histogram Detail\s+\(\d+\s+\w+ to\s+\d+\s+\w+\)\s*DB\/Inst:\s+\S+/);
+  $mode='Service Statistics' if ($line=~/^\s?Service Statistics\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='Service Wait Class Stats' if ($line=~/^\s?Service Wait Class Stats\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='SQL ordered by Elapsed Time' if ($line=~/^\s?SQL ordered by Elapsed Time\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='SQL ordered by CPU Time' if ($line=~/^\s?SQL ordered by CPU Time\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='SQL ordered by User I/O Wait Time' if ($line=~/^\s?SQL ordered by User I\/O Wait Time\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='SQL ordered by Gets' if ($line=~/^\s?SQL ordered by Gets\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='SQL ordered by Reads' if ($line=~/^\s?SQL ordered by Reads\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='SQL ordered by Physical Reads (UnOptimized)' if ($line=~/^\s?SQL ordered by Physical Reads \(UnOptimized\)\s*DB\/Inst:\s+\S+\s+/);
+  $mode='SQL ordered by Executions' if ($line=~/^\s?SQL ordered by Executions\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='SQL ordered by Parse Calls' if ($line=~/^\s?SQL ordered by Parse Calls\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='SQL ordered by Sharable Memory' if ($line=~/^\s?SQL ordered by Sharable Memory\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='SQL ordered by Version Count' if ($line=~/^\s?SQL ordered by Version Count\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='Instance Activity Stats' if ($line=~/^\s?Instance Activity Stats\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='Instance Activity Stats - Absolute Values' if ($line=~/^\s?Instance Activity Stats - Absolute Values\s*DB\/Inst:\s+\S+\s+/);
+  $mode='Instance Activity Stats - Thread Activity' if ($line=~/^\s?Instance Activity Stats - Thread Activity\s*DB\/Inst:\s+\S+\s+/);
+  $mode='IOStat by Function summary' if ($line=~/^\s?IOStat by Function summary\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='IOStat by Filetype summary' if ($line=~/^\s?IOStat by Filetype summary\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='IOStat by Function/Filetype summary' if ($line=~/^\s?IOStat by Function\/Filetype summary\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='Tablespace IO Stats' if ($line=~/^\s?Tablespace IO Stats\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='File IO Stats' if ($line=~/^\s?File IO Stats\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='Buffer Pool Statistics' if ($line=~/^\s?Buffer Pool Statistics\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='Checkpoint Activity' if ($line=~/^\s?Checkpoint Activity\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='Instance Recovery Stats' if ($line=~/^\s?Instance Recovery Stats\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='MTTR Advisory' if ($line=~/^\s?MTTR Advisory\s+DB\/Inst:\s+\S+/);
+  $mode='Buffer Pool Advisory' if ($line=~/^\s?Buffer Pool Advisory\s+DB\/Inst:\s+\S+\s+Snap:\s+\d+$/);
+  $mode='PGA Aggr Summary' if ($line=~/^\s?PGA Aggr Summary\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='PGA Aggr Target Histogram' if ($line=~/^\s?PGA Aggr Target Histogram\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='PGA Memory Advisory' if ($line=~/^\s?PGA Memory Advisory\s+DB\/Inst:\s+\S+\s+Snap:\s+\d+$/);
+  $mode='Shared Pool Advisory' if ($line=~/^\s?Shared Pool Advisory\s+DB\/Inst:\s+\S+\s+Snap:\s+\d+$/);
+  $mode='SGA Target Advisory' if ($line=~/^\s?SGA Target Advisory\s+DB\/Inst:\s+\S+\s+Snap:\s+\d+$/);
+  $mode='Streams Pool Advisory' if ($line=~/^\s?Streams Pool Advisory\s+DB\/Inst:\s+\S+\s+Snap:\s+\d+$/);
+  $mode='Java Pool Advisory' if ($line=~/^\s?Java Pool Advisory\s+DB\/Inst:\s+\S+\s+Snap:\s+\d+$/);
+  $mode='Buffer Wait Statistics' if ($line=~/^\s?Buffer Wait Statistics\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='Enqueue Activity' if ($line=~/^\s?Enqueue Activity\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='Undo Segment Summary' if ($line=~/^\s?Undo Segment Summary\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='Undo Segment Stats' if ($line=~/^\s?Undo Segment Stats\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='Latch Activity' if ($line=~/^\s?Latch Activity\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='Mutex Sleep Summary' if ($line=~/^\s?Mutex Sleep Summary\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='Parent Latch Statistics' if ($line=~/^\s?Parent Latch Statistics\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='Child Latch Statistics' if ($line=~/^\s?Child Latch Statistics\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='Segments by Logical Reads' if ($line=~/^\s?Segments by Logical Reads\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='Segments by Physical Reads' if ($line=~/^\s?Segments by Physical Reads\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='Segments by Physical Read Requests' if ($line=~/^\s?Segments by Physical Read Requests\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='Segments by UnOptimized Reads' if ($line=~/^\s?Segments by UnOptimized Reads\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='Segments by Optimized Reads' if ($line=~/^\s?Segments by Optimized Reads\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='Segments by Direct Physical Reads' if ($line=~/^\s?Segments by Direct Physical Reads\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='Segments by Physical Writes' if ($line=~/^\s?Segments by Physical Writes\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='Segments by Physical Write Requests' if ($line=~/^\s?Segments by Physical Write Requests\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='Segments by Direct Physical Writes' if ($line=~/^\s?Segments by Direct Physical Writes\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='Segments by Table Scans' if ($line=~/^\s?Segments by Table Scans\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='Segments by DB Blocks Changes' if ($line=~/^\s?Segments by DB Blocks Changes\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='Segments by Row Lock Waits' if ($line=~/^\s?Segments by Row Lock Waits\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='Segments by ITL Waits' if ($line=~/^\s?Segments by ITL Waits\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='Segments by Buffer Busy Waits' if ($line=~/^\s?Segments by Buffer Busy Waits\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='Dictionary Cache Stats' if ($line=~/^\s?Dictionary Cache Stats\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='Library Cache Activity' if ($line=~/^\s?Library Cache Activity\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='Memory Dynamic Components' if ($line=~/^\s?Memory Dynamic Components\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='Memory Resize Operations Summary' if ($line=~/^\s?Memory Resize Operations Summary\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='Memory Resize Ops' if ($line=~/^\s?Memory Resize Ops\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='Process Memory Summary' if ($line=~/^\s?Process Memory Summary\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='SGA Memory Summary' if ($line=~/^\s?SGA Memory Summary\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='SGA breakdown difference' if ($line=~/^\s?SGA breakdown difference\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='Streams CPU/IO Usage' if ($line=~/^\s?Streams CPU\/IO Usage\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='Streams Capture' if ($line=~/^\s?Streams Capture\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='Streams Capture Rate' if ($line=~/^\s?Streams Capture Rate\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='Streams Apply' if ($line=~/^\s?Streams Apply\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='Streams Apply Rate' if ($line=~/^\s?Streams Apply Rate\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='Buffered Queues' if ($line=~/^\s?Buffered Queues\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='Buffered Queue Subscribers' if ($line=~/^\s?Buffered Queue Subscribers\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='Rule Set' if ($line=~/^\s?Rule Set\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='Persistent Queues' if ($line=~/^\s?Persistent Queues\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='Persistent Queues Rate' if ($line=~/^\s?Persistent Queues Rate\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='Persistent Queue Subscribers' if ($line=~/^\s?Persistent Queue Subscribers\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='Resource Limit Stats' if ($line=~/^\s?Resource Limit Stats\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='Shared Servers Activity' if ($line=~/^\s?Shared Servers Activity\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='Shared Servers Rates' if ($line=~/^\s?Shared Servers Rates\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='Shared Servers Utilization' if ($line=~/^\s?Shared Servers Utilization\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='Shared Servers Common Queue' if ($line=~/^\s?Shared Servers Common Queue\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='Shared Servers Dispatchers' if ($line=~/^\s?Shared Servers Dispatchers\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='init.ora Parameters' if ($line=~/^\s?init.ora Parameters\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='init.ora Multi-Valued Parameters' if ($line=~/^\s?init.ora Multi-Valued Parameters\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  $mode='Dynamic Remastering Stats' if ($line=~/^\s?Dynamic Remastering Stats\s+DB\/Inst:\s+\S+\s+Snaps:\s+\d+-\d+$/);
+  printf("$mode\n");
+# 2. For ...  
+
+}
+
+# Close the awr report file.
+close (FILE);

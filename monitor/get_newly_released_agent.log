@@ -1,0 +1,8 @@
+smartmon11110617.tar
+program name is get_newly_released_agent
+1 running release process
+ftp 10.19.84.10 21 smartmon 21nomtrams release
+Passive mode on.
+Local directory now /smartmon
+smartmon11110617.tar: A file or directory in the path name does not exist.
+tar: smartmon11110617.tar: A file or directory in the path name does not exist.

@@ -1,0 +1,16 @@
+Fri Apr 26 16:35:00 BEIST 2013
+0 running smartmon_basic processes
+OS=aix
+conf_host_basic started
+conf_host_network started
+perf_host_iostat started
+perf_host_vmstat started
+perf_ora_basic started
+snap_host_netstat started
+snap_host_ps started
+snap_ora_alert started
+snap_ora_lock started
+nohup sh smartmon_transfer 0 ./tmp/smon.tmpfile.20130426163500.group.0 ./tmp/smon.tmpfile.20130426163500.group.0.status ./tmp/smon.tmpfile.20130426163500.group.0.result >workarea/smartmon_transfer.0.log 2>&1 &
+nohup sh smartmon_transfer 1 ./tmp/smon.tmpfile.20130426163500.group.1 ./tmp/smon.tmpfile.20130426163500.group.1.status ./tmp/smon.tmpfile.20130426163500.group.1.result >workarea/smartmon_transfer.1.log 2>&1 &
+nohup sh smartmon_transfer 2 ./tmp/smon.tmpfile.20130426163500.group.2 ./tmp/smon.tmpfile.20130426163500.group.2.status ./tmp/smon.tmpfile.20130426163500.group.2.result >workarea/smartmon_transfer.2.log 2>&1 &
+nohup sh smartmon_transfer 3 ./tmp/smon.tmpfile.20130426163500.group.3 ./tmp/smon.tmpfile.20130426163500.group.3.status ./tmp/smon.tmpfile.20130426163500.group.3.result >workarea/smartmon_transfer.3.log 2>&1 &

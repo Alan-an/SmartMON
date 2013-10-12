@@ -1,0 +1,52 @@
+USER is "SMARTMON_REPORT"
+drop table tmp_session_enqueue
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+
+Table created.
+
+drop table tmp_lock
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+
+Table created.
+
+drop table tmp_lock_session_basic
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+
+Table created.
+
+
+Table dropped.
+
+
+Table created.
+
+
+Table dropped.
+
+
+Table dropped.
+
+
+Table dropped.
+
+
+0 rows created.
+
+
+Commit complete.
+
+
+no rows selected
+

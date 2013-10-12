@@ -1,0 +1,156 @@
+
+
+***********************************************************************
+Fatal NI connect error 12547, connecting to:
+ (DESCRIPTION=(ADDRESS=(PROTOCOL=beq)(PROGRAM=/oracle/app/oracle/product/9.2/bin/oracle)(ARGV0=oracleols1)(ARGS='(DESCRIPTION=(LOCAL=YES)(ADDRESS=(PROTOCOL=beq)))')(DETACH=NO))(CONNECT_DATA=(CID=(PROGRAM=sqlplus@ls1)(HOST=ls1)(USER=smartmon))))
+
+  VERSION INFORMATION:
+	TNS for IBM/AIX RISC System/6000: Version 9.2.0.6.0 - Production
+	Oracle Bequeath NT Protocol Adapter for IBM/AIX RISC System/6000: Version 9.2.0.6.0 - Production
+  Time: 27-OCT-2011 14:09:02
+  Tracing not turned on.
+  Tns error struct:
+    nr err code: 0
+    ns main err code: 12547
+    TNS-12547: TNS:lost contact
+    ns secondary err code: 12560
+    nt main err code: 517
+    TNS-00517: Lost contact
+    nt secondary err code: 32
+    nt OS err code: 0
+
+
+***********************************************************************
+Fatal NI connect error 12547, connecting to:
+ (DESCRIPTION=(ADDRESS=(PROTOCOL=beq)(PROGRAM=/oracle/app/oracle/product/9.2/bin/oracle)(ARGV0=oracleols1)(ARGS='(DESCRIPTION=(LOCAL=YES)(ADDRESS=(PROTOCOL=beq)))')(DETACH=NO))(CONNECT_DATA=(CID=(PROGRAM=sqlplus@ls1)(HOST=ls1)(USER=smartmon))))
+
+  VERSION INFORMATION:
+	TNS for IBM/AIX RISC System/6000: Version 9.2.0.6.0 - Production
+	Oracle Bequeath NT Protocol Adapter for IBM/AIX RISC System/6000: Version 9.2.0.6.0 - Production
+  Time: 27-OCT-2011 14:10:01
+  Tracing not turned on.
+  Tns error struct:
+    nr err code: 0
+    ns main err code: 12547
+    TNS-12547: TNS:lost contact
+    ns secondary err code: 12560
+    nt main err code: 517
+    TNS-00517: Lost contact
+    nt secondary err code: 32
+    nt OS err code: 0
+
+
+***********************************************************************
+Fatal NI connect error 12547, connecting to:
+ (DESCRIPTION=(ADDRESS=(PROTOCOL=beq)(PROGRAM=/oracle/app/oracle/product/9.2/bin/oracle)(ARGV0=oracleols1)(ARGS='(DESCRIPTION=(LOCAL=YES)(ADDRESS=(PROTOCOL=beq)))')(DETACH=NO))(CONNECT_DATA=(CID=(PROGRAM=sqlplus@ls1)(HOST=ls1)(USER=smartmon))))
+
+  VERSION INFORMATION:
+	TNS for IBM/AIX RISC System/6000: Version 9.2.0.6.0 - Production
+	Oracle Bequeath NT Protocol Adapter for IBM/AIX RISC System/6000: Version 9.2.0.6.0 - Production
+  Time: 27-OCT-2011 14:11:01
+  Tracing not turned on.
+  Tns error struct:
+    nr err code: 0
+    ns main err code: 12547
+    TNS-12547: TNS:lost contact
+    ns secondary err code: 12560
+    nt main err code: 517
+    TNS-00517: Lost contact
+    nt secondary err code: 32
+    nt OS err code: 0
+
+
+***********************************************************************
+Fatal NI connect error 12547, connecting to:
+ (DESCRIPTION=(ADDRESS=(PROTOCOL=beq)(PROGRAM=/oracle/app/oracle/product/9.2/bin/oracle)(ARGV0=oracleols1)(ARGS='(DESCRIPTION=(LOCAL=YES)(ADDRESS=(PROTOCOL=beq)))')(DETACH=NO))(CONNECT_DATA=(CID=(PROGRAM=sqlplus@ls1)(HOST=ls1)(USER=smartmon))))
+
+  VERSION INFORMATION:
+	TNS for IBM/AIX RISC System/6000: Version 9.2.0.6.0 - Production
+	Oracle Bequeath NT Protocol Adapter for IBM/AIX RISC System/6000: Version 9.2.0.6.0 - Production
+  Time: 27-OCT-2011 14:12:03
+  Tracing not turned on.
+  Tns error struct:
+    nr err code: 0
+    ns main err code: 12547
+    TNS-12547: TNS:lost contact
+    ns secondary err code: 12560
+    nt main err code: 517
+    TNS-00517: Lost contact
+    nt secondary err code: 32
+    nt OS err code: 0
+
+
+***********************************************************************
+Fatal NI connect error 12547, connecting to:
+ (DESCRIPTION=(ADDRESS=(PROTOCOL=beq)(PROGRAM=/oracle/app/oracle/product/9.2/bin/oracle)(ARGV0=oracleols1)(ARGS='(DESCRIPTION=(LOCAL=YES)(ADDRESS=(PROTOCOL=beq)))')(DETACH=NO))(CONNECT_DATA=(CID=(PROGRAM=sqlplus@ls1)(HOST=ls1)(USER=smartmon))))
+
+  VERSION INFORMATION:
+	TNS for IBM/AIX RISC System/6000: Version 9.2.0.8.0 - Production
+	Oracle Bequeath NT Protocol Adapter for IBM/AIX RISC System/6000: Version 9.2.0.8.0 - Production
+  Time: 27-OCT-2011 14:13:01
+  Tracing not turned on.
+  Tns error struct:
+    ns main err code: 12547
+    TNS-12547: TNS:lost contact
+    ns secondary err code: 12560
+    nt main err code: 517
+    TNS-00517: Lost contact
+    nt secondary err code: 32
+    nt OS err code: 0
+
+
+***********************************************************************
+Fatal NI connect error 12547, connecting to:
+ (DESCRIPTION=(ADDRESS=(PROTOCOL=beq)(PROGRAM=/oracle/app/oracle/product/9.2/bin/oracle)(ARGV0=oracleols1)(ARGS='(DESCRIPTION=(LOCAL=YES)(ADDRESS=(PROTOCOL=beq)))')(DETACH=NO))(CONNECT_DATA=(CID=(PROGRAM=sqlplus@ls1)(HOST=ls1)(USER=smartmon))))
+
+  VERSION INFORMATION:
+	TNS for IBM/AIX RISC System/6000: Version 9.2.0.8.0 - Production
+	Oracle Bequeath NT Protocol Adapter for IBM/AIX RISC System/6000: Version 9.2.0.8.0 - Production
+  Time: 27-OCT-2011 14:14:01
+  Tracing not turned on.
+  Tns error struct:
+    ns main err code: 12547
+    TNS-12547: TNS:lost contact
+    ns secondary err code: 12560
+    nt main err code: 517
+    TNS-00517: Lost contact
+    nt secondary err code: 32
+    nt OS err code: 0
+
+
+***********************************************************************
+Fatal NI connect error 12547, connecting to:
+ (DESCRIPTION=(ADDRESS=(PROTOCOL=beq)(PROGRAM=/oracle/app/oracle/product/9.2/bin/oracle)(ARGV0=oracleols1)(ARGS='(DESCRIPTION=(LOCAL=YES)(ADDRESS=(PROTOCOL=beq)))')(DETACH=NO))(CONNECT_DATA=(CID=(PROGRAM=sqlplus@ls1)(HOST=ls1)(USER=smartmon))))
+
+  VERSION INFORMATION:
+	TNS for IBM/AIX RISC System/6000: Version 9.2.0.8.0 - Production
+	Oracle Bequeath NT Protocol Adapter for IBM/AIX RISC System/6000: Version 9.2.0.8.0 - Production
+  Time: 27-OCT-2011 14:15:01
+  Tracing not turned on.
+  Tns error struct:
+    ns main err code: 12547
+    TNS-12547: TNS:lost contact
+    ns secondary err code: 12560
+    nt main err code: 517
+    TNS-00517: Lost contact
+    nt secondary err code: 32
+    nt OS err code: 0
+
+
+***********************************************************************
+Fatal NI connect error 12547, connecting to:
+ (DESCRIPTION=(ADDRESS=(PROTOCOL=beq)(PROGRAM=/oracle/app/oracle/product/9.2/bin/oracle)(ARGV0=oracleols1)(ARGS='(DESCRIPTION=(LOCAL=YES)(ADDRESS=(PROTOCOL=beq)))')(DETACH=NO))(CONNECT_DATA=(CID=(PROGRAM=sqlplus@ls1)(HOST=ls1)(USER=smartmon))))
+
+  VERSION INFORMATION:
+	TNS for IBM/AIX RISC System/6000: Version 9.2.0.8.0 - Production
+	Oracle Bequeath NT Protocol Adapter for IBM/AIX RISC System/6000: Version 9.2.0.8.0 - Production
+  Time: 27-OCT-2011 14:16:01
+  Tracing not turned on.
+  Tns error struct:
+    ns main err code: 12547
+    TNS-12547: TNS:lost contact
+    ns secondary err code: 12560
+    nt main err code: 517
+    TNS-00517: Lost contact
+    nt secondary err code: 32
+    nt OS err code: 0
